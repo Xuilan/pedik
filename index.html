@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Redirect</title>
+</head>
+<body>
+    <h1>Отправка запроса и переход на другой сайт</h1>
+    <pre id="response"></pre>
+
+    <script>
+        // Функция для отправки запроса
+        function sendRequest() {
+            fetch('https://script.google.com/macros/s/AKfycbw36akDLMKAXiAkEvA6y2r8eeSmc05f_Fh_3t7f_8-VWYuNMRpP5f3LsWnN6yPLbQRc/exec', {
+                method: 'POST',
+                body: JSON.stringify({ ip: '192.168.1.1' }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById("response").textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Ошибка:', error));
+        }
+
+        // Отправка запроса
+        sendRequest();
+
+        // Переход на другой сайт через 3 секунды
+        setTimeout(() => {
+            window.location.href = 'https://xuilan.github.io/work/';
+        }, 3000); // 3000 миллисекунд (3 секунды)
+    </script>
+</body>
+</html>
